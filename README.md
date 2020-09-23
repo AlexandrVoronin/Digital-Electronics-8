@@ -1,3 +1,1 @@
-# Digital-Electronics-2
-
-<h> Header <h>
+# Digital-Electronics-2 (bold)
