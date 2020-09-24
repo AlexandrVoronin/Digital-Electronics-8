@@ -20,7 +20,7 @@ Unordered
 * Thing 2
   * Thing 2a
   * Thing 2b
-&nbsp;
+
 Ordered
 1. Item 1
 1. Item 2
