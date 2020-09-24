@@ -40,4 +40,4 @@ first column | second column
  &nbsp;
 
  
-(https://github.com/xjemel06/Digital-Electronics-2)
+https://github.com/xjemel06/Digital-Electronics-2
