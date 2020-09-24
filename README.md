@@ -6,11 +6,11 @@ Headers
 ###### This is an <h6> tag
   
   Emphasis
-*italic text*
-_italic text_
+*This is italic text*
+_This is italic text_
 
-**Bold text**
-__Bold text__
+**This is Bold text**
+__This is Bold text__
 
 _You **can** combine them_
 
