@@ -5,7 +5,7 @@ Headers
 ## This is an <h2> tag
 ###### This is an <h6> tag
   
-  Emphasis
+Emphasis
 *This is italic text*
 _This is italic text_
 
