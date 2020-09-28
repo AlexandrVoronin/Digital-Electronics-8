@@ -41,3 +41,5 @@ first column | second column
 
  
 [Link to Repository](https://github.com/xjemel06/Digital-Electronics-2)
+
+[1. Homework-morse code](https://github.com/xjemel06/Digital-Electronics-2/blob/master/main.c)
