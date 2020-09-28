@@ -1,5 +1,11 @@
 # Digital-Electronics-2 
 
+
+[Link to Repository](https://github.com/xjemel06/Digital-Electronics-2)
+
+[1. Homework-morse code](https://github.com/xjemel06/Digital-Electronics-2/blob/master/main.c)
+
+
 Headers
 # This is an <h1> tag
 ## This is an <h2> tag
@@ -40,6 +46,3 @@ first column | second column
  &nbsp;
 
  
-[Link to Repository](https://github.com/xjemel06/Digital-Electronics-2)
-
-[1. Homework-morse code](https://github.com/xjemel06/Digital-Electronics-2/blob/master/main.c)
