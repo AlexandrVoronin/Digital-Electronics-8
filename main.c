@@ -41,19 +41,19 @@
 	    {
 	        // Pause several miliseconds
 			/* D*/
-			;_delay_ms(LONG_DELAY);
-			PORTB = PORTB ^ (1<<LED_GREEN);
-			;_delay_ms(LONG_DELAY);
-			PORTB = PORTB ^ (1<<LED_GREEN);
-			;_delay_ms(SHORT_DELAY);
-			PORTB = PORTB ^ (1<<LED_GREEN);
-			;_delay_ms(SHORT_DELAY);
-			PORTB = PORTB ^ (1<<LED_GREEN);
-	        ;_delay_ms(SHORT_DELAY);
-			PORTB = PORTB ^ (1<<LED_GREEN);
-			;_delay_ms(SHORT_DELAY);
-			PORTB = PORTB ^ (1<<LED_GREEN);
-			;_delay_ms(LONG_DELAY);
+			;_delay_ms(LONG_DELAY);               /* pause between characters */
+			PORTB = PORTB ^ (1<<LED_GREEN);       /* lights up LED */
+			;_delay_ms(LONG_DELAY);               /* long lighting */
+			PORTB = PORTB ^ (1<<LED_GREEN);       /* lights off LED */
+			;_delay_ms(SHORT_DELAY);              /* pause between symbols */
+			PORTB = PORTB ^ (1<<LED_GREEN);       /* lights  up LED */
+			;_delay_ms(SHORT_DELAY);              /* short lighting */
+			PORTB = PORTB ^ (1<<LED_GREEN);       /* lights off LED */
+	                ;_delay_ms(SHORT_DELAY);              /* pause between symbols */
+			PORTB = PORTB ^ (1<<LED_GREEN);       /* lights  up LED */
+			;_delay_ms(SHORT_DELAY);              /* short lighting */
+			PORTB = PORTB ^ (1<<LED_GREEN);       /* lights off LED */
+			;_delay_ms(LONG_DELAY);               /* pause between characters */
 			
 			
 			
