@@ -19,10 +19,10 @@ int main(void)
 
 	// Function call
 	c = calculate(a, b);
-
+	printf("Result of function is %d",c);
+	
 	while (1)
 	{
-		
 	}
 	return 0;
 }

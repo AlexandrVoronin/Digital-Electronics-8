@@ -229,7 +229,7 @@ int main(void)
  130:	87 e2       	ldi	r24, 0x27	; 39
  132:	90 e0       	ldi	r25, 0x00	; 0
  134:	0e 94 40 00 	call	0x80	; 0x80 <GPIO_config_output>
-	GPIO_write_high(&PORTC, LED_RED);
+	GPIO_write_high(&PORTC, LED_RED);     // setting is different because LED is active in High
  138:	60 e0       	ldi	r22, 0x00	; 0
  13a:	88 e2       	ldi	r24, 0x28	; 40
  13c:	90 e0       	ldi	r25, 0x00	; 0
@@ -262,7 +262,7 @@ int main(void)
 
         // WRITE YOUR CODE HERE
 		/*if (bit_is_clear(PIND, BTN))*/
-		if(!GPIO_read(&PIND,BTN)) 
+		if(!GPIO_read(&PIND,BTN))         // using function of read
  15e:	60 e0       	ldi	r22, 0x00	; 0
  160:	89 e2       	ldi	r24, 0x29	; 41
  162:	90 e0       	ldi	r25, 0x00	; 0
@@ -270,12 +270,12 @@ int main(void)
  168:	81 11       	cpse	r24, r1
  16a:	f0 cf       	rjmp	.-32     	; 0x14c <main+0x32>
 		{
-		GPIO_toggle(&PORTB,LED_GREEN);
+		GPIO_toggle(&PORTB,LED_GREEN);    // blinking of first LED
  16c:	65 e0       	ldi	r22, 0x05	; 5
  16e:	85 e2       	ldi	r24, 0x25	; 37
  170:	90 e0       	ldi	r25, 0x00	; 0
  172:	0e 94 77 00 	call	0xee	; 0xee <GPIO_toggle>
-		GPIO_toggle(&PORTC,LED_RED);
+		GPIO_toggle(&PORTC,LED_RED);      // blinking of second LED
  176:	60 e0       	ldi	r22, 0x00	; 0
  178:	88 e2       	ldi	r24, 0x28	; 40
  17a:	90 e0       	ldi	r25, 0x00	; 0

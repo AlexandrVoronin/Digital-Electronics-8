@@ -19,8 +19,8 @@
 
 /* Defines -----------------------------------------------------------*/
 #define LED_GREEN   PB5     // AVR pin where green LED is connected
-#define LED_RED     PC0 
-#define BTN         PD0
+#define LED_RED     PC0     // AVR pin where red LED is connected
+#define BTN         PD0     // AVR pin where push button is connected
 #define BLINK_DELAY 500
 #ifndef F_CPU
 #define F_CPU 16000000      // CPU frequency in Hz required for delay
@@ -46,11 +46,13 @@ int main(void)
     /* second LED */
     // WRITE YOUR CODE HERE
 	GPIO_config_output(&DDRC, LED_RED);
-	GPIO_write_high(&PORTC, LED_RED);
+	GPIO_write_high(&PORTC, LED_RED);     // setting is different because LED is active in High
 
     /* push button */
     // WRITE YOUR CODE HERE
 	GPIO_config_input_pullup(&DDRD,BTN);
+	
+
     // Infinite loop
     while (1)
     {
@@ -59,10 +61,10 @@ int main(void)
 
         // WRITE YOUR CODE HERE
 		/*if (bit_is_clear(PIND, BTN))*/
-		if(!GPIO_read(&PIND,BTN)) 
+		if(!GPIO_read(&PIND,BTN))         // using function of read
 		{
-		GPIO_toggle(&PORTB,LED_GREEN);
-		GPIO_toggle(&PORTC,LED_RED);
+		GPIO_toggle(&PORTB,LED_GREEN);    // blinking of first LED
+		GPIO_toggle(&PORTC,LED_RED);      // blinking of second LED
 		}
 		
     }
