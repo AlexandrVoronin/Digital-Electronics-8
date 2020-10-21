@@ -1,4 +1,11 @@
 /*
+ * Knightrider2.c
+ *
+ * Created: 20.10.2020 20:29:37
+ * Author : Michal
+ */ 
+
+/*
  * 04-interrupts.c
  *
  * Created: 14.10.2020 11:21:49
@@ -21,6 +28,7 @@
 #define LED_D1  PB5
 #define LED_D2  PB4
 #define LED_D3  PB3
+#define LED_D4  PB2
 
 /* Includes ----------------------------------------------------------*/
 #include <avr/io.h>         // AVR device-specific IO definitions
@@ -47,21 +55,15 @@ int main(void)
 	/*Configuring LED 3 */
 	GPIO_config_output(&DDRB, LED_D3);
 	GPIO_write_low(&PORTB, LED_D3);
-
-    /* Configuration of 8-bit Timer/Counter0 */
-    // WRITE YOUR CODE HERE
-	TIM0_overflow_128us();
-	TIM0_overflow_interrupt_enable();
-
+	
+	/*Configuring LED 4 */
+	GPIO_config_output(&DDRB, LED_D4);
+	GPIO_write_low(&PORTB, LED_D4);
+   
     /* Configuration of 16-bit Timer/Counter1
      * Set prescaler and enable overflow interrupt */
-    TIM1_overflow_262ms();
+    TIM1_overflow_1s();
     TIM1_overflow_interrupt_enable();
-
-    /* Configuration of 8-bit Timer/Counter2 */
-    // WRITE YOUR CODE HERE
-	TIM2_overflow_512us();
-	TIM2_overflow_interrupt_enable();
 
     // Enables interrupts by setting the global interrupt mask
     sei();
@@ -79,26 +81,16 @@ int main(void)
 
 /* Interrupt service routines ----------------------------------------*/
 /**
- * ISR starts when Timer/Counter1 overflows. Toggle LED D2 on 
+ * Knightrider blinking
  * Multi-function shield. */
 ISR(TIMER1_OVF_vect)
 {
     // WRITE YOUR CODE HERE
-	GPIO_toggle(&PORTB,LED_D2);
-	GPIO_toggle(&PORTB,LED_D2);
-}
-
-/*Toggle LED_D1*/
-ISR(TIMER0_OVF_vect)
-{
-	// WRITE YOUR CODE HERE
 	GPIO_toggle(&PORTB,LED_D1);
 	GPIO_toggle(&PORTB,LED_D1);
+	GPIO_toggle(&PORTB,LED_D2);
+	GPIO_toggle(&PORTB,LED_D3);
+	GPIO_toggle(&PORTB,LED_D4);
+
 }
 
-ISR(TIMER2_OVF_vect)
-{
-	// WRITE YOUR CODE HERE
-	GPIO_toggle(&PORTB,LED_D3);
-	GPIO_toggle(&PORTB,LED_D3);
-}

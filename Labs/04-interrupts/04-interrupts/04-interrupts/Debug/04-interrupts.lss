@@ -143,6 +143,8 @@ int main(void)
   d8:	90 e0       	ldi	r25, 0x00	; 0
   da:	0e 94 4c 00 	call	0x98	; 0x98 <GPIO_write_low>
     // WRITE YOUR CODE HERE
+	
+	/*Configuring LED 1 */
 	GPIO_config_output(&DDRB, LED_D1);
   de:	65 e0       	ldi	r22, 0x05	; 5
   e0:	84 e2       	ldi	r24, 0x24	; 36
@@ -154,6 +156,7 @@ int main(void)
   ec:	90 e0       	ldi	r25, 0x00	; 0
   ee:	0e 94 4c 00 	call	0x98	; 0x98 <GPIO_write_low>
 	
+	/*Configuring LED 3 */
 	GPIO_config_output(&DDRB, LED_D3);
   f2:	63 e0       	ldi	r22, 0x03	; 3
   f4:	84 e2       	ldi	r24, 0x24	; 36
@@ -278,6 +281,7 @@ ISR(TIMER1_OVF_vect)
 
 000001ac <__vector_16>:
 
+/*Toggle LED_D1*/
 ISR(TIMER0_OVF_vect)
 {
  1ac:	1f 92       	push	r1
