@@ -506,16 +506,16 @@ ISR(TIMER2_OVF_vect)
  2c8:	cd b7       	in	r28, 0x3d	; 61
  2ca:	de b7       	in	r29, 0x3e	; 62
     static uint8_t number_of_overflows2 = 0;
-    static uint8_t tens = 0;						// Tenths of a second
-	static uint8_t secs = 0;						// Seconds
-	static uint8_t mins = 0;						// Minutes
-	static uint32_t square_secs = 0;				// Square seconds
-    char lcd_string[2] = "  ";						// String for converting numbers by itoa()
+    static uint8_t tens = 0;							// Tenths of a second
+	static uint8_t secs = 0;							// Seconds
+	static uint8_t mins = 0;							// Minutes
+	static uint32_t square_secs = 0;					// Square seconds
+    char lcd_string[2] = "  ";							// String for converting numbers by itoa()
  2cc:	80 e2       	ldi	r24, 0x20	; 32
  2ce:	90 e2       	ldi	r25, 0x20	; 32
  2d0:	9a 83       	std	Y+2, r25	; 0x02
  2d2:	89 83       	std	Y+1, r24	; 0x01
-	static uint8_t clearing_square = 11;			// Helping number for clearing square seconds
+	static uint8_t clearing_square = 11;				// Helping number for clearing square seconds
 	
     number_of_overflows2++;
  2d4:	80 91 45 01 	lds	r24, 0x0145	; 0x800145 <number_of_overflows2.1955>
@@ -523,10 +523,10 @@ ISR(TIMER2_OVF_vect)
     if (number_of_overflows2 >= 6)
  2da:	86 30       	cpi	r24, 0x06	; 6
  2dc:	18 f4       	brcc	.+6      	; 0x2e4 <__vector_9+0x44>
-	static uint8_t mins = 0;						// Minutes
-	static uint32_t square_secs = 0;				// Square seconds
-    char lcd_string[2] = "  ";						// String for converting numbers by itoa()
-	static uint8_t clearing_square = 11;			// Helping number for clearing square seconds
+	static uint8_t mins = 0;							// Minutes
+	static uint32_t square_secs = 0;					// Square seconds
+    char lcd_string[2] = "  ";							// String for converting numbers by itoa()
+	static uint8_t clearing_square = 11;				// Helping number for clearing square seconds
 	
     number_of_overflows2++;
  2de:	80 93 45 01 	sts	0x0145, r24	; 0x800145 <number_of_overflows2.1955>
@@ -776,12 +776,12 @@ ISR(TIMER2_OVF_vect)
  46a:	90 e0       	ldi	r25, 0x00	; 0
  46c:	0e 94 b3 02 	call	0x566	; 0x566 <__itoa_ncheck>
 		}
-		itoa(tens, lcd_string, 10);						//shows tenths of seconds
-        lcd_gotoxy(7, 0);
+	itoa(tens, lcd_string, 10);							//shows tenths of seconds
+    lcd_gotoxy(7, 0);
  470:	60 e0       	ldi	r22, 0x00	; 0
  472:	87 e0       	ldi	r24, 0x07	; 7
  474:	0e 94 90 00 	call	0x120	; 0x120 <lcd_gotoxy>
-		lcd_puts(lcd_string);
+	lcd_puts(lcd_string);
  478:	ce 01       	movw	r24, r28
  47a:	01 96       	adiw	r24, 0x01	; 1
  47c:	0e 94 a2 00 	call	0x144	; 0x144 <lcd_puts>
@@ -837,31 +837,31 @@ ISR(TIMER0_OVF_vect)
 	static uint8_t number_of_overflows0 = 0;
     static uint8_t symbol = 0;
     static uint8_t position = 0;
-	static uint8_t clearing_bar = 0;             //helping number for clearing
+	static uint8_t clearing_bar = 0;             		//helping number for clearing
 
-	number_of_overflows0++;                      //incrementing until overflow
+	number_of_overflows0++;                      		//incrementing until overflow
  4cc:	80 91 3d 01 	lds	r24, 0x013D	; 0x80013d <number_of_overflows0.1970>
  4d0:	8f 5f       	subi	r24, 0xFF	; 255
  4d2:	80 93 3d 01 	sts	0x013D, r24	; 0x80013d <number_of_overflows0.1970>
-	symbol++;									 //incrementing symbols in one position
+	symbol++;											//incrementing symbols in one position
  4d6:	90 91 3c 01 	lds	r25, 0x013C	; 0x80013c <symbol.1971>
  4da:	9f 5f       	subi	r25, 0xFF	; 255
  4dc:	90 93 3c 01 	sts	0x013C, r25	; 0x80013c <symbol.1971>
 	
-	if (number_of_overflows0 > 5)                //incrementing until 5 (96 ms )
+	if (number_of_overflows0 > 5)                		//incrementing until 5 (96 ms )
  4e0:	86 30       	cpi	r24, 0x06	; 6
  4e2:	28 f1       	brcs	.+74     	; 0x52e <__vector_16+0x84>
 	{
-		number_of_overflows0 = 0;                //preparing fro next overflow
+		number_of_overflows0 = 0;               		//preparing fro next overflow
  4e4:	10 92 3d 01 	sts	0x013D, r1	; 0x80013d <number_of_overflows0.1970>
-		position++;								 //set next position
+		position++;										//set next position
  4e8:	80 91 3b 01 	lds	r24, 0x013B	; 0x80013b <position.1972>
  4ec:	8f 5f       	subi	r24, 0xFF	; 255
  4ee:	80 93 3b 01 	sts	0x013B, r24	; 0x80013b <position.1972>
-		symbol=0;								 //beginning 
+		symbol=0;										//beginning 
  4f2:	10 92 3c 01 	sts	0x013C, r1	; 0x80013c <symbol.1971>
 		
-		if (position > 9)                        //counting to one second
+		if (position > 9)                        		//counting to one second
  4f6:	8a 30       	cpi	r24, 0x0A	; 10
  4f8:	d0 f0       	brcs	.+52     	; 0x52e <__vector_16+0x84>
 		{
@@ -870,46 +870,46 @@ ISR(TIMER0_OVF_vect)
  4fe:	8a 30       	cpi	r24, 0x0A	; 10
  500:	80 f4       	brcc	.+32     	; 0x522 <__vector_16+0x78>
 			{
-				lcd_gotoxy(1+clearing_bar, 1);    //jumping on needed position
+				lcd_gotoxy(1+clearing_bar, 1);			//jumping on needed position
  502:	61 e0       	ldi	r22, 0x01	; 1
  504:	8f 5f       	subi	r24, 0xFF	; 255
  506:	0e 94 90 00 	call	0x120	; 0x120 <lcd_gotoxy>
-				symbol=0;                         //using empty character 
+				symbol=0;								//using empty character 
  50a:	10 92 3c 01 	sts	0x013C, r1	; 0x80013c <symbol.1971>
-				lcd_putc(symbol);                 //clearing of positions
+				lcd_putc(symbol);						//clearing of positions
  50e:	80 e0       	ldi	r24, 0x00	; 0
  510:	0e 94 9e 00 	call	0x13c	; 0x13c <lcd_putc>
 				clearing_bar++;
  514:	80 91 3a 01 	lds	r24, 0x013A	; 0x80013a <__data_end>
  518:	8f 5f       	subi	r24, 0xFF	; 255
  51a:	80 93 3a 01 	sts	0x013A, r24	; 0x80013a <__data_end>
-		position++;								 //set next position
-		symbol=0;								 //beginning 
+		position++;										//set next position
+		symbol=0;										//beginning 
 		
-		if (position > 9)                        //counting to one second
+		if (position > 9)                        		//counting to one second
 		{
 			while (clearing_bar<10)
  51e:	8a 30       	cpi	r24, 0x0A	; 10
  520:	80 f3       	brcs	.-32     	; 0x502 <__vector_16+0x58>
-				lcd_gotoxy(1+clearing_bar, 1);    //jumping on needed position
-				symbol=0;                         //using empty character 
-				lcd_putc(symbol);                 //clearing of positions
+				lcd_gotoxy(1+clearing_bar, 1);			//jumping on needed position
+				symbol=0;								//using empty character 
+				lcd_putc(symbol);						//clearing of positions
 				clearing_bar++;
 			}
-			clearing_bar=0;                       //preparing x for next loop
+			clearing_bar=0;                       		//preparing x for next loop
  522:	10 92 3a 01 	sts	0x013A, r1	; 0x80013a <__data_end>
-			position=0;                           //setting position at beginning
+			position=0;                           		//setting position at beginning
  526:	10 92 3b 01 	sts	0x013B, r1	; 0x80013b <position.1972>
-			symbol=0;							  //setting character at empty
+			symbol=0;									//setting character at empty
  52a:	10 92 3c 01 	sts	0x013C, r1	; 0x80013c <symbol.1971>
 		}
 	}
-	lcd_gotoxy(1+position, 1);					  //setting cursor on position 1+
+	lcd_gotoxy(1+position, 1);							//setting cursor on position 1+
  52e:	80 91 3b 01 	lds	r24, 0x013B	; 0x80013b <position.1972>
  532:	61 e0       	ldi	r22, 0x01	; 1
  534:	8f 5f       	subi	r24, 0xFF	; 255
  536:	0e 94 90 00 	call	0x120	; 0x120 <lcd_gotoxy>
-	lcd_putc(symbol-1);                           //subtracting 1 to match the character table
+	lcd_putc(symbol-1);                           		//subtracting 1 to match the character table
  53a:	80 91 3c 01 	lds	r24, 0x013C	; 0x80013c <symbol.1971>
  53e:	81 50       	subi	r24, 0x01	; 1
  540:	0e 94 9e 00 	call	0x13c	; 0x13c <lcd_putc>
