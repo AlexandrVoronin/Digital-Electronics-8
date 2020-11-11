@@ -125,12 +125,12 @@ int main(void)
 ISR(TIMER2_OVF_vect)
 {
     static uint8_t number_of_overflows2 = 0;
-    static uint8_t tens = 0;        // Tenths of a second
-	static uint8_t secs = 0;        // Seconds
-	static uint8_t mins = 0;        // Minutes
-	static uint32_t square_secs = 0; // Square seconds
-    char lcd_string[2] = "  ";      // String for converting numbers by itoa()
-	static uint8_t y = 11; 
+    static uint8_t tens = 0;						// Tenths of a second
+	static uint8_t secs = 0;						// Seconds
+	static uint8_t mins = 0;						// Minutes
+	static uint32_t square_secs = 0;				// Square seconds
+    char lcd_string[2] = "  ";						// String for converting numbers by itoa()
+	static uint8_t clearing_square = 11;			// Helping number for clearing square seconds
 	
     number_of_overflows2++;
     if (number_of_overflows2 >= 6)
@@ -138,53 +138,50 @@ ISR(TIMER2_OVF_vect)
         // Do this every 6 x 16 ms = 100 ms
         number_of_overflows2 = 0;
 		tens++;
-		if (tens>9)
+		if (tens>9)										//incrementing tenths until 9
 		{
 			tens=0;
 			secs++;
-			if(secs > 59)
+			if(secs > 59)								//incrementing seconds until 59
 			{
-				while (y<15)
+				while (clearing_square<15)				//clearing of square seconds after minute
 				{
-					lcd_gotoxy(y, 0);
-					lcd_putc(0);
-					y++;
+					lcd_gotoxy(clearing_square, 0);		//sets cursor to wanted location
+					lcd_putc(0);						//secures zeroing of square seconds after 59 minutes
+					clearing_square++;
 				}
-				y=11;
-				secs=0;
-				itoa(secs, lcd_string, 10);
-				lcd_gotoxy(4, 0);
-				lcd_puts(lcd_string);
-				mins++;
-				if(mins > 59)
+				clearing_square=11;						//prepares number zeroing for next loop
+				secs=0;									//ensures zeroing of seconds after minute
+				itoa(secs, lcd_string, 10);				//sends seconds to string
+				lcd_gotoxy(4, 0);						//sets cursor into location
+				lcd_puts(lcd_string);					//sends data on cursor
+				mins++;									//increments minutes
+				if(mins > 59)							//zeroing after an hour
 				{
-					mins=0;
-					itoa(mins, lcd_string, 10);
-					lcd_gotoxy(1, 0);
-					lcd_puts(lcd_string);
-
-					
+					mins=0;								//sets minutes to 0
+					itoa(mins, lcd_string, 10);			//sends minutes to string
+					lcd_gotoxy(1, 0);					//sets cursor
+					lcd_puts(lcd_string);				//sends data on cursor
 				}
 				
-				if(mins > 9)
+				if(mins > 9)							//what happens after minutes reach 10
 				{
-					itoa(mins, lcd_string, 10);
-					lcd_gotoxy(1, 0);
-					lcd_puts(lcd_string);
+					itoa(mins, lcd_string, 10);			//sends minutes to string
+					lcd_gotoxy(1, 0);					//moves cursor to show tens of minutes
+					lcd_puts(lcd_string);				//sends string data on cursor
 				}
 				else
 				{
-					
-					itoa(mins, lcd_string, 10);
-					lcd_gotoxy(2, 0);
+					itoa(mins, lcd_string, 10);			//if there is less minutes than ten 
+					lcd_gotoxy(2, 0);					//cursor is located at units of minutes
 					lcd_puts(lcd_string);
 				}
 				
 			}
 			
-			if(secs > 9)
-			{
-				itoa(secs, lcd_string, 10);
+			if(secs > 9)								//if there is more than nine seconds
+			{											//it writes at tens else it writes in 
+				itoa(secs, lcd_string, 10);             //units of seconds
 				lcd_gotoxy(4, 0);
 				lcd_puts(lcd_string);
 				
@@ -197,12 +194,12 @@ ISR(TIMER2_OVF_vect)
 				lcd_puts(lcd_string);
 			}
 			
-			square_secs = secs * secs;
-			lcd_gotoxy(11, 0);
-			itoa(square_secs, lcd_string, 10);
-			lcd_puts(lcd_string);
+			square_secs = secs * secs;					//square of seconds
+			lcd_gotoxy(11, 0);							//sets cursor
+			itoa(square_secs, lcd_string, 10);			//send square of seconds in string
+			lcd_puts(lcd_string);						//writes square seconds on display
 		}
-		itoa(tens, lcd_string, 10);
+		itoa(tens, lcd_string, 10);						//shows tenths of seconds
         lcd_gotoxy(7, 0);
 		lcd_puts(lcd_string);
 		
@@ -219,33 +216,33 @@ ISR(TIMER0_OVF_vect)
 	static uint8_t number_of_overflows0 = 0;
     static uint8_t symbol = 0;
     static uint8_t position = 0;
-	static uint8_t x = 0;
+	static uint8_t clearing_bar = 0;             //helping number for clearing
 
-	number_of_overflows0++;
-	symbol++;
-	if (number_of_overflows0 >= 6)
+	number_of_overflows0++;                      //incrementing until overflow
+	symbol++;									 //incrementing symbols in one position
+	
+	if (number_of_overflows0 > 5)                //incrementing until 5 (96 ms )
 	{
-		symbol=5;
-		number_of_overflows0 = 0;
-		position++;
-		symbol=0;
+		number_of_overflows0 = 0;                //preparing fro next overflow
+		position++;								 //set next position
+		symbol=0;								 //beginning 
 		
-		if (position > 9)
+		if (position > 9)                        //counting to one second
 		{
-			while (x<10)
+			while (clearing_bar<10)
 			{
-				lcd_gotoxy(1+x, 1);
-				symbol=0;
-				lcd_putc(symbol);
-				x++;
+				lcd_gotoxy(1+clearing_bar, 1);    //jumping on needed position
+				symbol=0;                         //using empty character 
+				lcd_putc(symbol);                 //clearing of positions
+				clearing_bar++;
 			}
-			x=0;
-			position=0;
-			symbol=0;
+			clearing_bar=0;                       //preparing x for next loop
+			position=0;                           //setting position at beginning
+			symbol=0;							  //setting character at empty
 		}
 	}
-	lcd_gotoxy(1+position, 1);
-	lcd_putc(symbol-1);
+	lcd_gotoxy(1+position, 1);					  //setting cursor on position 1+
+	lcd_putc(symbol-1);                           //subtracting 1 to match the character table
 	
 }
 
