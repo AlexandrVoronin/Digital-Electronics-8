@@ -105,10 +105,10 @@ ISR(ADC_vect)
 	char lcd_string[5];						//string for sending data to LCD
 	value=ADC;
 	int bit_value[16];						//converted value to binary
-	uint16_t i;								//used in if for incrementing
-	uint16_t parity_num=0;							//used to decide if parity must be 1 or 0
+	uint16_t i;							//used in if for incrementing
+	uint16_t parity_num=0;						//used to decide if parity must be 1 or 0
 	
-	itoa(value, lcd_string, 10);			//sets cursor and string			
+	itoa(value, lcd_string, 10);					//sets cursor and string			
 	lcd_gotoxy(8, 0);
 	lcd_puts("    ");
 	lcd_gotoxy(8, 0);
@@ -116,9 +116,9 @@ ISR(ADC_vect)
 	
 	if(value<700)							//reduction of statements in console
 	{
-		uart_puts("ADC value");				//sets console
-		uart_puts(lcd_string);				//writes down value
-		uart_puts("\n");
+		uart_puts("ADC value");					//sets console
+		uart_puts(lcd_string);					//writes down value
+		uart_puts("\n");	
 	}
 	
 
@@ -126,33 +126,33 @@ ISR(ADC_vect)
 	//Identification of pressed button
 	
 	lcd_gotoxy(8, 1);						//sets cursor
-	lcd_puts("       ");					//clearing previous identification
+	lcd_puts("       ");						//clearing previous identification
 	if (value >= 1020)						//reduction of statements in console 
 	{
 		lcd_gotoxy(8, 1);
 		lcd_puts("None");					//no button is pushed
 	}
-	else if (value>=0 && value< 10)			//identifying pushed right button
+	else if (value>=0 && value< 10)					//identifying pushed right button
 	{
 		lcd_gotoxy(8, 1);
 		lcd_puts("Right");
 	}
-	else if (value>90 && value< 110)		//identifying pushed up button
+	else if (value>90 && value< 110)				//identifying pushed up button
 	{
 		lcd_gotoxy(8, 1);
 		lcd_puts("Up");
 	}
-	else if (value>230 && value< 250)		//identifying pushed down button
+	else if (value>230 && value< 250)				//identifying pushed down button
 	{
 		lcd_gotoxy(8, 1);
 		lcd_puts("Down");
 	}
-	else if (value>390 && value< 410)		//identifying pushed left button
+	else if (value>390 && value< 410)				//identifying pushed left button
 	{
 		lcd_gotoxy(8, 1);
 		lcd_puts("Left");
 	}
-	else if (value>640 && value< 660)		//identifying pushed select button
+	else if (value>640 && value< 660)				//identifying pushed select button
 	{
 		lcd_gotoxy(8, 1);
 		lcd_puts("Select");
@@ -162,9 +162,9 @@ ISR(ADC_vect)
 
 	//Odd parity program
 
-	for(i=0;value>0;i++)					//converting decimal value to binary
+	for(i=0;value>0;i++)						//converting decimal value to binary
 	{
-		bit_value[i]=value%2;				//modulo for one bit
+		bit_value[i]=value%2;					//modulo for one bit
 		if ((bit_value[i]%2) == 1)			
 		{
 			parity_num++;					//incrementing ones
@@ -172,9 +172,9 @@ ISR(ADC_vect)
 		value=value/2;
 	}
 	
-	if (parity_num%2==0)					//if number of ones is even parity is 1
+	if (parity_num%2==0)						//if number of ones is even parity is 1
 	{
-		itoa(1, lcd_string, 10);			//shows one for parity
+		itoa(1, lcd_string, 10);				//shows one for parity
 		lcd_gotoxy(15, 0);
 		lcd_puts("    ");
 		lcd_gotoxy(15, 0);
@@ -182,7 +182,7 @@ ISR(ADC_vect)
 	} 
 	else
 	{
-		itoa(0, lcd_string, 10);			//shows 0 for parity
+		itoa(0, lcd_string, 10);				//shows 0 for parity
 		lcd_gotoxy(15, 0);
 		lcd_puts("    ");
 		lcd_gotoxy(15, 0);
