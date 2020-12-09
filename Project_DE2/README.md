@@ -1,8 +1,10 @@
-# Your project title
+# Project_DE2
 
-### Team members
+### Členové týmu
 
-Names of all project team members.
+Michal Jemelka
+
+Ondřej Pišťák 
 
 [Link to your GitHub project folder](http://github.com/xxx)
 
