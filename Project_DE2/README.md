@@ -56,4 +56,6 @@ Ondřej Pišťák
 
 ## References
 
-1. Write your text here.
+1. [Popis senzoru](https://components101.com/ultrasonic-sensor-working-pinout-datasheet)
+
+2. [Datasheet](https://components101.com/sites/default/files/component_datasheet/HCSR04%20Datasheet.pdf)
