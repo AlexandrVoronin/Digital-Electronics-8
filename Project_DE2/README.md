@@ -23,16 +23,19 @@ Ondřej Pišťák
 - Stavový diagram
 ![Stavový diagram](state_diagram.png)
 
-- Hlavní program [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c) se dělí na import knihoven, hlavní smyčku a na obslužné funce přerušení.
+- Hlavní program [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c) se dělí na import knihoven, hlavní smyčku a na obslužné funkce přerušení.
 
 Importu knihoven - se propojí knihovny\
                  -nadefinují globální proměnné a kmitočet procesoru\
                  \
 Hlavní smyčka - inicializuje porty, komunikační protokol UART, LCD displej\
               - nastavení časovačů, a požadavek o přerušení\
-              - nekonečný cyklus zaručující stálou fůnkčnost programu\
+              - nekonečný cyklus zaručující stálou funkčnost programu\
               \
+Funkce přerušení - obsahuje čtyři funkce přerušení - dva typu PinChange a dva typu Timer\
 
+Přerušení založené na typu Timer používaji  časovače Timer1 a Timer2\
+Požadavek přerušení od Timer1 vyvolá funkci, která vyšle na oba senzory 10 us pulzy, které vygenerují burst.
 
 
 
