@@ -22,10 +22,11 @@ Ondřej Pišťák
 ## Popis kódu a simulace
 - Stavový diagram
 ![Stavový diagram](state_diagram.png)
-
+\
+\
 - Hlavní program [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c) se dělí na import knihoven, hlavní smyčku a na obslužné funkce přerušení.
-
-Importu knihoven
+\
+Import knhighven
 - se propojí knihovny
 -nadefinují globální proměnné a kmitočet procesoru
  \
