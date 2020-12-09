@@ -37,7 +37,8 @@ Ondřej Pišťák
 - nastavení časovačů, a požadavek o přerušení
 - nekonečný cyklus zaručující stálou funkčnost programu 
 
-#### Funkce přerušení - obsahuje čtyři funkce přerušení - dva typu PinChange a dva typu Timer 
+#### Funkce přerušení 
+- obsahuje dvě přerušení založené na principu změny pinu (PinChange) a dvě založené na časovačích (Timer) 
 
 - Přerušení založené na PinChange reagují na vzestupnou hranu na dvou EchoPinech
   - PinChange0 reprezentuje levý senzor a PinChange1 pravý senzor.
