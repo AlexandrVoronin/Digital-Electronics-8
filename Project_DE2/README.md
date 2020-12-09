@@ -23,7 +23,8 @@ Ondřej Pišťák
 - Stavový diagram
 ![Stavový diagram](state_diagram.png)
 
-- 
+
+
 
 ## Video/Animation
 
