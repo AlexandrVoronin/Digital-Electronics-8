@@ -10,7 +10,9 @@ Ondřej Pišťák
 
 
 ### Cíle projektu
-- Vytvořit funkční aplikaci parkovacího asistenta s využitím ultrasonických senzorů a Arduina
+- Cílem projektu je vytvořit funkční aplikaci parkovacího asistenta s využitím ultrasonických senzorů a Arduina. Tato aplikace využívá periferie k zobrazování vzdálenosti objektu od senzoru. Pužité periferie jsou: LCD displej, LED panel a reproduktor. Následně je využit i komunikační protokol UART. Veškeré vzdálenosti jsou zobrazovány v centimetrech.
+
+
 
 
 
