@@ -73,6 +73,9 @@ int main(void)
     }
 }
 
+// Interrupt requests //
+
+// Timer1 - generating of pulse 
 ISR(TIMER1_OVF_vect)
 {
 	static int pulse_switch = 0;	
@@ -96,10 +99,11 @@ ISR(TIMER1_OVF_vect)
 	}
 }
 
+// PinChange0 - Reciving of pulse from left sensor and calculation of distance. 
 ISR(INT0_vect)
 {
-	static uint16_t counterL=0;
-	char stringL[8]="      ";
+	static uint16_t counterL=0;					// used for calculating width of pulse
+	char stringL[8]="      ";					// variable for sending data to LCD and UART
 	while(GPIO_read(&PIND,echoPinL))				// measuring pulse width 
 	{		
 		counterL++;
@@ -128,10 +132,11 @@ ISR(INT0_vect)
 	counterL = 0;							// reset counter for new process	
 }
 
+// PinChange1 - Reciving of pulse from right sensor and calculation of distance. 
 ISR(INT1_vect)
 {
-	static uint16_t counterR=0;
-	char stringR[8]="      ";	
+	static uint16_t counterR=0;					// used for calculating width of pulse
+	char stringR[8]="      ";					// variable for sending data to LCD and UART
 	while(GPIO_read(&PIND,echoPinR))				// measuring pulse width
 	{		
 		counterR++;
@@ -163,6 +168,7 @@ ISR(INT1_vect)
 	LED_off();							// every interrupt turns off LED 
 }
 
+// Timer2 evaluating of distance and making a choice for LED bar and Buzzer
 ISR(TIMER2_OVF_vect)
 {
 	int Freq_reg=100;
