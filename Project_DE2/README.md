@@ -58,4 +58,10 @@ Ondřej Pišťák
 
 1. [Popis senzoru](https://components101.com/ultrasonic-sensor-working-pinout-datasheet)
 
-2. [Datasheet](https://components101.com/sites/default/files/component_datasheet/HCSR04%20Datasheet.pdf)
+2. [Datasheet HC-SR04](https://components101.com/sites/default/files/component_datasheet/HCSR04%20Datasheet.pdf)
+
+3. [Mikroprocesor ATmega328P](https://www.microchip.com/wwwproducts/en/ATmega328p)
+
+4. [Datasheet mikroprocesoru](https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf)
+
+5. [Schéma Arduino shield](https://github.com/tomas-fryza/Digital-electronics-2/blob/master/Docs/arduino_shield.pdf)
