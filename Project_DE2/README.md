@@ -34,8 +34,16 @@ Hlavní smyčka - inicializuje porty, komunikační protokol UART, LCD displej\
               \
 Funkce přerušení - obsahuje čtyři funkce přerušení - dva typu PinChange a dva typu Timer\
 
+Přerušení založené na PinChange reagují na vzestupnou hranu na dvou EchoPinech\
+- PinChange0 reprezentuje levý senzor a PinChange1 pravý senzor.\
+- PinChange0 a PinChange1 mají prakticky stejnou funkci. V obou případech se měří šířka přijatého pulzu, která se dále přepočítává na reálnou vzdálenost v cm. Dále se veškerá potřebná data odesílají na LCD diplej a UART.
+
 Přerušení založené na typu Timer používaji  časovače Timer1 a Timer2\
-Požadavek přerušení od Timer1 vyvolá funkci, která vyšle na oba senzory 10 us pulzy, které vygenerují burst.
+- Požadavek přerušení od Timer1 vyvolá funkci, která vyšle na oba senzory 10 us pulzy, které vygenerují burst. Tato funkce se opakuje jednou za 1 s.\
+- Požadavek přerušení od Timer2 vyhodnocuje vzdálenost a podle toho spuští LED panel a zvukovou signalizaci.
+
+
+
 
 
 
