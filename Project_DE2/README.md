@@ -23,7 +23,19 @@ Ondřej Pišťák
 - Stavový diagram
 ![Stavový diagram](state_diagram.png)
 
-V hlavním programu [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c)  
+- Hlavní program [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c) se dělí na import knihoven, hlavní smyčku a na obslužné funce přerušení.
+
+Importu knihoven - se propojí knihovny\
+                 -nadefinují globální proměnné a kmitočet procesoru\
+                 \
+Hlavní smyčka - inicializuje porty, komunikační protokol UART, LCD displej\
+              - nastavení časovačů, a požadavek o přerušení\
+              - nekonečný cyklus zaručující stálou fůnkčnost programu\
+              \
+
+
+
+
 
 ## Video/Animation
 
