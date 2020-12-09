@@ -48,7 +48,7 @@ Ondřej Pišťák
   - Požadavek přerušení od Timer1 vyvolá funkci, která vyšle na oba senzory 10 us pulzy, které vygenerují burst. Tato funkce se opakuje jednou za 1 s.
   - Požadavek přerušení od Timer2 vyhodnocuje vzdálenost a podle toho spouští LED panel a zvukovou signalizaci. 
 
-
+![Screenshot simulace](Screenshot.png)
 
 ## Video
 
