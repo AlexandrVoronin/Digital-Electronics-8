@@ -9,9 +9,9 @@ Ondřej Pišťák
 [Link to your GitHub project folder](http://github.com/xxx)
 
 
-### Project objectives
+### Cíle projektu
+- Vytvořit funkční aplikaci parkovacího asistenta s využitím ultrasonických senzorů a Arduina
 
-Write your text here.
 
 
 ## Hardware description
