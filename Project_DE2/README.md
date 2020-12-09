@@ -52,7 +52,7 @@ Ondřej Pišťák
 
 ## Video
 
-![Odkaz na video na YouTube](https://youtu.be/cEXJesjSIcg)
+[Odkaz na video na YouTube](https://youtu.be/cEXJesjSIcg)
 
 ## References
 
