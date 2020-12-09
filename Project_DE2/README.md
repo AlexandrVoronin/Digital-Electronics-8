@@ -14,7 +14,7 @@ Ondřej Pišťák
 
 ## Popis Hardwaru
 - Screenshot simulide
-[Schéma zapojení](Schema.png)
+![Schéma zapojení](Schema.png)
 
 
 
