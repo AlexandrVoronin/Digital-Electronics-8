@@ -6,7 +6,7 @@ Michal Jemelka
 
 Ondřej Pišťák 
 
-[Link to your GitHub project folder](http://github.com/xxx)
+[Odkaz na repositář v GitHubu](https://github.com/xjemel06/Digital-Electronics-2/tree/master/Project_DE2)
 
 
 ### Cíle projektu
