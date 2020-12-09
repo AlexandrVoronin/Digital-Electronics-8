@@ -171,9 +171,9 @@ ISR(INT1_vect)
 // Timer2 evaluating of distance and making a choice for LED bar and Buzzer
 ISR(TIMER2_OVF_vect)
 {
-	int Freq_reg=100;
+	int Freq_reg=100;						// used saving of closer distance
 	
-	if(L_global < R_global)						// chose closer sensor
+	if(L_global < R_global)						// chooses closer sensor
 	{
 		Freq_reg = L_global;
 	}	
@@ -186,7 +186,7 @@ ISR(TIMER2_OVF_vect)
 	{
 		TIM2_overflow_16384us();				// set frequency
 		GPIO_toggle(&PORTB,sound);				// create sound 
-		LED_toggle(1);	
+		LED_toggle(1);						// calls function which turns on one LED
 	}
 	else if (Freq_reg <= 40 && Freq_reg > 30)
 	{
