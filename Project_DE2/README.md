@@ -23,7 +23,10 @@ Ondřej Pišťák
 - Stavový diagram
 ![Stavový diagram](state_diagram.png) 
 
-- Hlavní program [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c) se dělí na import knihoven, hlavní smyčku a na obslužné funkce přerušení. 
+### Hlavní program [main.c](https://github.com/xjemel06/Digital-Electronics-2/blob/master/Project_DE2/Project_DE2/Project_DE2/Project_DE2/main.c) se dělí na: 
+- import knihoven
+- hlavní smyčku
+- obslužné funkce přerušení. 
 
 ### Import knihoven
 - propojí knihovny
@@ -42,7 +45,7 @@ Ondřej Pišťák
 
 #### Přerušení založené na typu Timer používaji  časovače Timer1 a Timer2
 - Požadavek přerušení od Timer1 vyvolá funkci, která vyšle na oba senzory 10 us pulzy, které vygenerují burst. Tato funkce se opakuje jednou za 1 s.
-- Požadavek přerušení od Timer2 vyhodnocuje vzdálenost a podle toho spuští LED panel a zvukovou signalizaci. 
+- Požadavek přerušení od Timer2 vyhodnocuje vzdálenost a podle toho spouští LED panel a zvukovou signalizaci. 
 
 
 
