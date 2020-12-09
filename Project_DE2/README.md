@@ -20,6 +20,7 @@ Ondřej Pišťák
 
 
 ## Popis kódu a simulace
+- Stavový diagram
 ![Stavový diagram](state_diagram.png)
 
 
