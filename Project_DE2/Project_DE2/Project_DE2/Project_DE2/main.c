@@ -26,33 +26,33 @@
 #include <util/delay.h>
 
 
-int L_global=100;		// distance for left sensor as a global variable
-int R_global=100;		// distance for right sensor as a global variable
+int L_global=100;							// distance for left sensor as a global variable
+int R_global=100;							// distance for right sensor as a global variable
 
 int main(void)
 {
 	lcd_init(LCD_DISP_ON);	
 	
-	GPIO_config_output(&DDRB, trigPinL);		// set pin trigPinL as output
-	GPIO_config_input_nopull(&DDRD,echoPinL);	// set pin echoPinL as input
+	GPIO_config_output(&DDRB, trigPinL);				// set pin trigPinL as output
+	GPIO_config_input_nopull(&DDRD,echoPinL);			// set pin echoPinL as input
 	
-	GPIO_config_output(&DDRB, trigPinR);		// set pin trigPinR as output
-	GPIO_config_input_nopull(&DDRD,echoPinR);	// set pin echoPinR as input
+	GPIO_config_output(&DDRB, trigPinR);				// set pin trigPinR as output
+	GPIO_config_input_nopull(&DDRD,echoPinR);			// set pin echoPinR as input
 	
-	GPIO_config_output(&DDRB, sound);			// set pin sound as output
-	GPIO_write_low(&PORTB,sound);				// set pin sound to low 
+	GPIO_config_output(&DDRB, sound);				// set pin sound as output
+	GPIO_write_low(&PORTB,sound);					// set pin sound to low 
 		
-	LED_out();									// set all LED pins as output
+	LED_out();							// set all LED pins as output
 	
-	LED_off();									// set all LED pins to low 
+	LED_off();							// set all LED pins to low 
 		
-	EIMSK |= (1<<INT0);							// Set up pin change interrupt INT0
+	EIMSK |= (1<<INT0);						// Set up pin change interrupt INT0
 	EICRA |= ((1<<ISC00) | (1<<ISC01));
 	
-	EIMSK |= (1<<INT1);							// Set up pin change interrupt INT1
+	EIMSK |= (1<<INT1);						// Set up pin change interrupt INT1
 	EICRA |= ((1<<ISC10) | (1<<ISC11));
 	
-	lcd_gotoxy(0,0);							// Preset LCD dispaly
+	lcd_gotoxy(0,0);						// Preset LCD dispaly
 	lcd_puts("L:");
 	
 	lcd_gotoxy(0,1);
@@ -60,7 +60,7 @@ int main(void)
 	
 	uart_init(UART_BAUD_SELECT(9600,F_CPU));
 		
-	TIM1_overflow_1s();							// Set up Timers 1, 2  
+	TIM1_overflow_1s();						// Set up Timers 1, 2  
 	TIM1_overflow_interrupt_enable();
 		
 	TIM2_overflow_16384us();
@@ -73,12 +73,15 @@ int main(void)
     }
 }
 
+// Interrupt requests //
+
+// Timer1 - generating of pulse 
 ISR(TIMER1_OVF_vect)
 {
 	static int pulse_switch = 0;	
 	if(pulse_switch == 0)
 	{
-		GPIO_write_low(&PORTB,trigPinL);		// transmit 10 us pulse on pin trigPinL
+		GPIO_write_low(&PORTB,trigPinL);			// transmit 10 us pulse on pin trigPinL
 		_delay_us(1);
 		GPIO_write_high(&PORTB,trigPinL);
 		_delay_us(10);
@@ -87,7 +90,7 @@ ISR(TIMER1_OVF_vect)
 	}
 	else if(pulse_switch == 1)
 	{
-		GPIO_write_low(&PORTB,trigPinR);		// transmit 10 us pulse on pin trigPinR
+		GPIO_write_low(&PORTB,trigPinR);			// transmit 10 us pulse on pin trigPinR
 		_delay_us(1);
 		GPIO_write_high(&PORTB,trigPinR);
 		_delay_us(10);
@@ -96,16 +99,17 @@ ISR(TIMER1_OVF_vect)
 	}
 }
 
+// PinChange0 - Reciving of pulse from left sensor and calculation of distance. 
 ISR(INT0_vect)
 {
-	static uint16_t counterL=0;
-	char stringL[8]="      ";
-	while(GPIO_read(&PIND,echoPinL))			// measuring pulse width 
+	static uint16_t counterL=0;					// used for calculating width of pulse
+	char stringL[8]="      ";					// variable for sending data to LCD and UART
+	while(GPIO_read(&PIND,echoPinL))				// measuring pulse width 
 	{		
 		counterL++;
 	}	
  	counterL=counterL/21.55;					// calculation of distance
-	if (counterL <= 2 || counterL >=400 )		// range of sensor
+	if (counterL <= 2 || counterL >=400 )				// range of sensor
 	{
 		uart_puts("N/A \n");					// send data to LCD display and UART
 		lcd_gotoxy(2,0);
@@ -125,20 +129,21 @@ ISR(INT0_vect)
 		uart_puts("\n");
 	}
 	L_global=counterL;
-	counterL = 0;								// reset counter for new process	
+	counterL = 0;							// reset counter for new process	
 }
 
+// PinChange1 - Reciving of pulse from right sensor and calculation of distance. 
 ISR(INT1_vect)
 {
-	static uint16_t counterR=0;
-	char stringR[8]="      ";	
-	while(GPIO_read(&PIND,echoPinR))			// measuring pulse width
+	static uint16_t counterR=0;					// used for calculating width of pulse
+	char stringR[8]="      ";					// variable for sending data to LCD and UART
+	while(GPIO_read(&PIND,echoPinR))				// measuring pulse width
 	{		
 		counterR++;
 	}	
  	counterR=counterR/19.3;						// calculation of distance
 	
- 	if (counterR <= 2 || counterR >=400 )		// range of sensor
+ 	if (counterR <= 2 || counterR >=400 )				// range of sensor
  	{
  		uart_puts("N/A \n");					// send data to LCD display and UART
 		lcd_gotoxy(2,1);
@@ -158,16 +163,17 @@ ISR(INT1_vect)
 		uart_puts("\n");
 	}
 	R_global=counterR;
-	counterR = 0;								// reset counter for new process
+	counterR = 0;							// reset counter for new process
 	
-	LED_off();									// every interrupt turns off LED 
+	LED_off();							// every interrupt turns off LED 
 }
 
+// Timer2 evaluating of distance and making a choice for LED bar and Buzzer
 ISR(TIMER2_OVF_vect)
 {
-	int Freq_reg=100;
+	int Freq_reg=100;						// used saving of closer distance
 	
-	if(L_global < R_global)						// chose closer sensor
+	if(L_global < R_global)						// chooses closer sensor
 	{
 		Freq_reg = L_global;
 	}	
@@ -176,11 +182,11 @@ ISR(TIMER2_OVF_vect)
 		Freq_reg = R_global;
 	}
 	
-	if (Freq_reg <= 50 && Freq_reg > 40)		// set frequency of buzzer according to distance
+	if (Freq_reg <= 50 && Freq_reg > 40)				// set frequency of buzzer according to distance
 	{
 		TIM2_overflow_16384us();				// set frequency
 		GPIO_toggle(&PORTB,sound);				// create sound 
-		LED_toggle(1);	
+		LED_toggle(1);						// calls function which turns on one LED
 	}
 	else if (Freq_reg <= 40 && Freq_reg > 30)
 	{
